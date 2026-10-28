@@ -26,3 +26,82 @@ body {
     background-position: center;
   }
 }
+
+/* ───────── 애니메이션 ─────────
+   easeOutQuint 계열 곡선: 빠르게 출발해 부드럽게 멈춰서 "툭 튀는" 느낌 없이 고급스럽게 보임 */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 스크롤 진입 fade-up + blur 해제 (Reveal 컴포넌트) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out),
+    filter 0.9s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* 첫 진입 Hero 문구 순차 등장. 스크롤 감지 없이 페이지 로드 직후 바로 재생 */
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.intro {
+  animation: intro-up 1s var(--ease-out) both;
+  animation-delay: var(--intro-delay, 0ms);
+}
+
+/* Hero 일러스트: 등장 후 위아래로 천천히 떠 있는 느낌 */
+@keyframes intro-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.intro-image {
+  animation:
+    intro-zoom 1.2s var(--ease-out) 0.2s both,
+    float 6s ease-in-out 1.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .intro,
+  .intro-image {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+    animation: none;
+  }
+}
