@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.*
+*.tsbuildinfo
+
+# tsc -b가 만드는 빌드 부산물
+vite.config.js
+vite.config.d.ts
+
+# 고객사 내부 자료 — 공개 저장소에 올리지 않음
+기획안.pdf
+디자인시안.html
+
+# Windows 바로가기
+*.lnk
