@@ -20,7 +20,7 @@ export default function Performance() {
       <PageHero
         crumbs={[{ label: "홈", path: "/" }, { label: "실적·고객사" }, { label: "사업실적" }]}
         title="사업실적"
-        desc="한전KDN을 통해 발주된 한국전력·발전사 상용 S/W 유지보수 및 구매 사업입니다."
+        desc="스핀토테크놀러지가 수행한 주요 사업 실적입니다."
         tabs={tabs}
       />
 
