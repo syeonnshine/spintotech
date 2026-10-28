@@ -1,5 +1,6 @@
 import PageHero from "../../components/PageHero";
 import { historyItems } from "../../data/history";
+import { CURRENT_YEAR, FOUNDED_YEAR } from "../../data/company";
 
 const tabs = [
   { label: "회사개요", path: "/company/overview" },
@@ -17,7 +18,9 @@ export default function History() {
       />
 
       <section className="mx-auto max-w-container px-6 py-section-mobile sm:py-section">
-        <h2 className="text-[28px] font-bold text-navy sm:text-[32px]">2009 – 2026</h2>
+        <h2 className="text-[28px] font-bold text-navy sm:text-[32px]">
+          {FOUNDED_YEAR} – {CURRENT_YEAR}
+        </h2>
         <p className="mt-2 text-muted">
           법인 설립부터 Oracle 골드 파트너, 한전·한수원 협력업체 등록까지 이어진 17년입니다.
         </p>

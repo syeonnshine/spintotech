@@ -23,7 +23,7 @@ export const orgTeams: OrgTeam[] = [
   },
   {
     name: "경영지원팀",
-    roles: ["[담당 업무 확인 필요]"],
+    roles: ["재무·회계","인사·노무","총무"],
   },
 ];
 

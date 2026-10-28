@@ -36,8 +36,12 @@ export type StatCard = {
   label: string;
 };
 
+// 업력·연혁 범위가 해마다 자동으로 바뀌도록 설립연도와 올해를 기준값으로 둠 (빌드 시점이 아니라 방문 시점 기준)
+export const FOUNDED_YEAR = 2009;
+export const CURRENT_YEAR = new Date().getFullYear();
+
 export const stats: StatCard[] = [
-  { value: "17", unit: "년", label: "2009년 설립, 공공 IT 인프라 한 길" },
+  { value: String(CURRENT_YEAR - FOUNDED_YEAR), unit: "년", label: `${FOUNDED_YEAR}년 설립, 공공 IT 인프라 한 길` },
   { value: "197", unit: "억 원", label: "최근 5년 공공 용역·구매 실적" },
   { value: "75", unit: "%", label: "전체 인력 중 전문 기술인력 비율" },
 ];
