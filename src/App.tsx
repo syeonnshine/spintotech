@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -19,9 +19,10 @@ function ScrollToTop() {
   return null;
 }
 
+// GitHub Pages는 SPA 경로 fallback이 없어 /company/overview 새로고침 시 404 → 서버 설정이 필요 없는 HashRouter 사용
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <div className="flex min-h-screen flex-col">
         <Header />
@@ -38,6 +39,6 @@ export default function App() {
         </main>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
