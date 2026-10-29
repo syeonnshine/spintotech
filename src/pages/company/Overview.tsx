@@ -1,6 +1,6 @@
 import PageHero from "../../components/PageHero";
 import NaverMap from "../../components/NaverMap";
-import { company, greetingBody } from "../../data/company";
+import { company, greeting } from "../../data/company";
 import { orgTeams, partnerships } from "../../data/org";
 
 const tabs = [
@@ -21,16 +21,25 @@ export default function Overview() {
       {/* 인사말 */}
       <section className="mx-auto max-w-container px-6 py-section-mobile sm:py-section">
         <h2 className="text-2xl font-bold leading-snug text-navy sm:text-[32px]">
-          공공 IT 인프라가 멈추지 않도록,
-          {/* 모바일에서는 자연 줄바꿈에 맡김 — 강제 br이 있으면 "않도록,"만 한 줄로 떨어짐 */}
+          {greeting.title[0]}
+          {/* 모바일에서는 자연 줄바꿈에 맡김 — 강제 br이 있으면 첫 줄 끝 단어만 한 줄로 떨어짐 */}
           <br className="hidden sm:block" />{" "}
-          가장 가까이에서 지키겠습니다
+          {greeting.title[1]}
         </h2>
-        <p className="mt-6 max-w-3xl whitespace-pre-line text-sm leading-relaxed text-muted">
-          {greetingBody}
-        </p>
-        <p className="mt-6 text-sm font-semibold text-body">
-          {company.nameKo} 대표이사 {company.ceo}
+        {/* 데스크톱은 전체 본문, 모바일은 축약본 */}
+        <div className="mt-6 hidden max-w-3xl space-y-4 text-base leading-relaxed sm:text-lg text-muted sm:block">
+          {greeting.body.map((para) => (
+            <p key={para}>{para}</p>
+          ))}
+        </div>
+        <div className="mt-6 space-y-4 text-base leading-relaxed text-muted sm:hidden">
+          {greeting.bodyShort.map((para) => (
+            <p key={para}>{para}</p>
+          ))}
+        </div>
+        <p className="mt-8 text-lg font-semibold text-body sm:text-xl">
+          {company.nameKo} 대표이사{" "}
+          <span className="ml-3 text-xl font-bold text-navy sm:text-3xl">{company.ceo}</span>
         </p>
       </section>
 
