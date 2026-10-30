@@ -70,25 +70,33 @@ function CheckIcon() {
 // Hero 요소별 등장 지연값 (ms) — 배지 → 타이틀 → 설명 → 버튼 → 체크리스트 순으로 120ms씩
 const introDelay = (step: number) => ({ "--intro-delay": `${step * 120}ms` }) as CSSProperties;
 
+// 내용 검토 전까지 Hero 아래 섹션(숫자·사업분야·솔루션·실적·고객사)을 임시로 숨김 — 오픈 시 true로 변경
+const SHOW_SECTIONS = false;
+
 export default function Home() {
   return (
-    <div>
-      {/* 1. Hero */}
-      <section className="hero-bg relative overflow-hidden text-white">
+    <div className="flex flex-1 flex-col">
+      {/* 1. Hero — 하단 섹션을 숨긴 동안에는 Hero가 헤더·푸터를 뺀 남은 높이를 채워 한 화면에 들어오게 함.
+          하단 패딩이 컸던 건 숫자 카드를 겹쳐 올리기 위해서라, 숨김 상태에선 여백을 줄임 */}
+      <section className={`hero-bg relative overflow-hidden text-white ${SHOW_SECTIONS ? "" : "flex flex-1 items-center"}`}>
         {/* 데스크톱은 텍스트/이미지 2단, 모바일은 텍스트 아래로 이미지가 내려가도록 grid로 배치 */}
-        <div className="mx-auto grid max-w-container items-center gap-10 px-5 pb-[72px] pt-10 sm:px-6 lg:grid-cols-2 lg:pb-32 lg:pt-24">
-          <div className="flex flex-col gap-5 lg:gap-7">
+        <div
+          className={`mx-auto grid w-full max-w-container items-center gap-10 px-5 sm:px-6 lg:grid-cols-2 ${
+            SHOW_SECTIONS ? "pb-[72px] pt-10 lg:pb-32 lg:pt-24" : "pb-12 pt-8 lg:py-10 short:py-6"
+          }`}
+        >
+          <div className={`flex flex-col gap-5 ${SHOW_SECTIONS ? "lg:gap-7" : "lg:gap-6 short:gap-4"}`}>
             <p style={introDelay(0)} className="intro flex items-center gap-2 self-start rounded-full border border-[#9FC9EC]/45 bg-sky/10 px-3.5 py-1.5 text-[13px] font-semibold text-[#BFE3FA] sm:text-sm">
               <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full bg-[#5FC3F5]" />
               <span className="sm:hidden">{heroContent.badgeShort}</span>
               <span className="hidden sm:inline">{heroContent.badge}</span>
             </p>
-            <h1 style={introDelay(1)} className="intro text-[30px] font-bold leading-[1.35] tracking-[-0.02em] sm:text-[44px] lg:text-[54px] lg:leading-[1.28]">
+            <h1 style={introDelay(1)} className={`intro text-[30px] font-bold leading-[1.35] tracking-[-0.02em] sm:text-[44px] lg:text-[54px] lg:leading-[1.28] ${SHOW_SECTIONS ? "" : "short:text-[44px]"}`}>
               ICT 산업의 선두기업
               <br className="hidden sm:block" /> <span className="text-[#6ac9f8]">스핀토테크놀러지</span>
               
             </h1>
-            <p style={introDelay(2)} className="intro max-w-[520px] text-base text-[#D3E0EE] sm:text-[19px]">{heroContent.description}</p>
+            <p style={introDelay(2)} className={`intro max-w-[520px] text-base text-[#D3E0EE] sm:text-[19px] ${SHOW_SECTIONS ? "" : "short:text-[17px]"}`}>{heroContent.description}</p>
             <div style={introDelay(3)} className="intro flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 to="/company/overview"
@@ -97,10 +105,10 @@ export default function Home() {
                 회사소개 보기
               </Link>
               <Link
-                to="/performance"
+                to="/support"
                 className="rounded-lg border border-white/50 bg-white/[0.06] px-[26px] py-[14px] text-center font-semibold text-white transition-colors hover:border-white"
               >
-                사업실적 보기 →
+                고객지원 →
               </Link>
             </div>
             <ul style={introDelay(4)} className="intro mt-2 flex flex-wrap gap-x-7 gap-y-2.5 border-t border-[#9FC9EC]/25 pt-5 text-[15px] text-[#D3E0EE]">
@@ -113,10 +121,12 @@ export default function Home() {
             </ul>
           </div>
           {/* 장식용 일러스트라 alt는 비워 스크린리더가 건너뛰게 함 */}
-          <img src={heroImage} alt="" aria-hidden="true" className="intro-image mx-auto w-full max-w-md lg:max-w-none" />
+          <img src={heroImage} alt="" aria-hidden="true" className={`intro-image mx-auto w-full max-w-md lg:max-w-none ${SHOW_SECTIONS ? "" : "lg:max-h-[400px] lg:object-contain short:max-h-[320px]"}`} />
         </div>
       </section>
 
+      {SHOW_SECTIONS && (
+      <>
       {/* 2. 숫자로 보는 스핀토 — Hero 하단에 겹쳐 올려 시선이 자연스럽게 이어지게 함 */}
       <section aria-label="숫자로 보는 스핀토" className="relative mx-auto -mt-10 max-w-container px-5 sm:px-6 lg:-mt-14">
         <StatCards />
@@ -194,6 +204,8 @@ export default function Home() {
     
         </div>
       </section>
+      </>
+      )}
     </div>
   );
 }

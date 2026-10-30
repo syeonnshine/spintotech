@@ -1,42 +1,44 @@
 import { Link } from "react-router-dom";
 import { navItems } from "../data/nav";
 import { company } from "../data/company";
-import logoRaw from "../assets/logo.svg?raw";
-
-// <img>로 넣으면 SVG 내부 색을 못 바꾸므로 raw로 받아 어두운 글자색만 흰색으로 치환 (원본 파일은 헤더와 공유)
-const footerLogo = logoRaw.replace(/#231F20/gi, "#FFFFFF");
+import logo from "../assets/logo.svg";
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-white">
-      <div className="mx-auto max-w-container px-6 py-14">
-        <Link
-          to="/"
-          aria-label={company.nameKo}
-          className="inline-block h-12 [&>svg]:h-full [&>svg]:w-auto"
-          dangerouslySetInnerHTML={{ __html: footerLogo }}
-        />
-        <address className="mt-4 text-sm not-italic leading-relaxed text-white/70">
-          {company.nameKo}
-          <br />
-          {company.address}
-          <br />
-          {/* 번호 단위로 묶어 좁은 화면에서 번호 중간이 끊기지 않게 함. 모바일에서 바로 걸 수 있도록 tel 링크 */}
-          <a href={`tel:${company.phone}`} className="whitespace-nowrap hover:text-white">
-            T. {company.phone}
-          </a>
-          <span aria-hidden="true" className="mx-2">|</span>
-          <span className="whitespace-nowrap">F. {company.fax}</span>
-        </address>
-        {/* 320px에서는 메뉴 4개가 한 줄을 넘으므로 줄바꿈 허용 */}
-        <nav aria-label="푸터 메뉴" className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/80">
-          {navItems.map((item) => (
-            <Link key={item.path} to={item.path} className="hover:text-white">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <p className="mt-8 text-xs text-white/50">© {new Date().getFullYear()} SpintoTechnology. All rights reserved.</p>
+    // 흰 배경이라 흰 본문 페이지와 붙을 때 경계가 사라지지 않도록 상단 구분선 유지
+    // 데스크톱은 회사정보(좌)·메뉴(우) 한 줄 배치로 높이를 줄여 메인이 한 화면에 들어오게 함
+    <footer className="border-t border-line bg-white text-body">
+      <div className="mx-auto flex max-w-container flex-col gap-5 px-6 py-8 lg:flex-row lg:items-end lg:justify-between lg:py-6 short:py-4">
+        <div>
+          {/* 헤더와 같은 로고 — 흰 배경이라 원본 색 그대로 사용 */}
+          <Link to="/" className="inline-block">
+            <img src={logo} alt={company.nameKo} className="h-10 w-auto" />
+          </Link>
+          <address className="mt-2 text-sm not-italic leading-relaxed text-muted">
+            {/* 데스크톱에서는 주소·연락처를 한 줄로 이어 붙임 */}
+            {company.address}
+            <span aria-hidden="true" className="mx-2 hidden lg:inline">|</span>
+            <br className="lg:hidden" />
+            {/* 번호 단위로 묶어 좁은 화면에서 번호 중간이 끊기지 않게 함. 모바일에서 바로 걸 수 있도록 tel 링크 */}
+            <a href={`tel:${company.phone}`} className="whitespace-nowrap hover:text-navy">
+              T. {company.phone}
+            </a>
+            <span aria-hidden="true" className="mx-2">|</span>
+            <span className="whitespace-nowrap">F. {company.fax}</span>
+          </address>
+        </div>
+        {/* 데스크톱은 메뉴 아래에 저작권을 둬서 좌·우 블록 높이를 맞춤 (푸터가 두 줄 높이로 끝남) */}
+        <div className="flex flex-col gap-3 lg:items-end">
+          {/* 320px에서는 메뉴 4개가 한 줄을 넘으므로 줄바꿈 허용 */}
+          <nav aria-label="푸터 메뉴" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-body">
+            {navItems.map((item) => (
+              <Link key={item.path} to={item.path} className="hover:text-brand">
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <p className="text-xs text-muted">© {new Date().getFullYear()} SpintoTechnology. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );

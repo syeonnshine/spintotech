@@ -7,6 +7,11 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      // 높이가 낮은 데스크톱(1366x768 노트북 등) 전용 구간 — 메인을 한 화면에 맞추려고 글자·여백을 한 단계 줄일 때 사용.
+      // extend로 추가하면 기본 screens 뒤에 생성돼 lg:보다 우선 적용됨
+      screens: {
+        short: { raw: "(min-width: 1024px) and (max-height: 800px)" },
+      },
       // 기획안 디자인 가이드 색상 체계 (기획안.pdf 3p 참고)
       colors: {
         navy: "#0B2545",
