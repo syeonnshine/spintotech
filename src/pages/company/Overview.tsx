@@ -1,12 +1,7 @@
 import PageHero from "../../components/PageHero";
 import NaverMap from "../../components/NaverMap";
 import { company, greeting } from "../../data/company";
-import { orgTeams, partnerships } from "../../data/org";
-
-const tabs = [
-  { label: "회사개요", path: "/company/overview" },
-  { label: "연혁", path: "/company/history" },
-];
+// import { orgTeams } from "../../data/org";
 
 export default function Overview() {
   return (
@@ -14,8 +9,7 @@ export default function Overview() {
       <PageHero
         crumbs={[{ label: "홈", path: "/" }, { label: "회사소개" }, { label: "회사개요" }]}
         title="회사개요"
-        desc="공공·에너지 분야 IT 인프라를 공급하고 운영하는 스핀토테크놀러지를 소개합니다."
-        tabs={tabs}
+        desc="IT 인프라를 공급하고 운영하는 스핀토테크놀러지를 소개합니다."
       />
 
       {/* 인사말 */}
@@ -71,7 +65,7 @@ export default function Overview() {
         </div>
       </section>
 
-      {/* 조직도 */}
+      {/* 조직도 — 자료 확정 전까지 비공개. 다시 열 때 주석과 아래 orgTeams import 주석을 함께 해제
       <section className="mx-auto max-w-container px-6 py-section-mobile sm:py-section">
         <h2 className="text-[28px] font-bold text-navy sm:text-[32px]">조직도</h2>
         <p className="mt-2 text-muted">
@@ -93,23 +87,7 @@ export default function Overview() {
           ))}
         </div>
       </section>
-
-      {/* 파트너십·협력업체 등록 */}
-      <section className="bg-section">
-        <div className="mx-auto max-w-container px-6 py-section-mobile sm:py-section">
-          <h2 className="text-[28px] font-bold text-navy sm:text-[32px]">파트너십·협력업체 등록</h2>
-          <p className="mt-2 text-muted">제조사와 공공기관이 인정한 공급 자격</p>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {partnerships.map((p) => (
-              <div key={p.title} className="rounded border border-line bg-white p-6">
-                <p className="text-xs font-medium text-brand">{p.group}</p>
-                <h3 className="mt-2 font-bold text-navy">{p.title}</h3>
-                <p className="mt-1 text-sm text-muted">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      */}
 
       {/* 오시는 길 */}
       <section className="mx-auto max-w-container px-6 py-section-mobile sm:py-section">

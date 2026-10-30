@@ -13,7 +13,7 @@ export default function History() {
       <PageHero
         crumbs={[{ label: "홈", path: "/" }, { label: "회사소개" }, { label: "연혁" }]}
         title="연혁"
-        desc="2009년 설립 이후 제조사·공공기관과 쌓아온 파트너십의 기록입니다."
+        desc="2009년 설립 이후 제조사와 쌓아온 파트너십의 기록입니다."
         tabs={tabs}
       />
 
@@ -22,7 +22,7 @@ export default function History() {
           {FOUNDED_YEAR} – {CURRENT_YEAR}
         </h2>
         <p className="mt-2 text-muted">
-          법인 설립부터 Oracle 골드 파트너, 한전·한수원 협력업체 등록까지 이어진 17년입니다.
+          법인 설립부터 제조사 골드 파트너십, DB 어플라이언스 공급업체 등록까지 이어진 {CURRENT_YEAR - FOUNDED_YEAR}년입니다.
         </p>
 
         <ol className="relative mt-10 border-l border-line pl-8">

@@ -7,11 +7,11 @@ export type OrgTeam = {
 export const orgTeams: OrgTeam[] = [
   {
     name: "솔루션사업팀",
-    roles: ["Oracle 솔루션 영업", "TmaxSoft 솔루션 영업", "모니터링·백업 솔루션 영업"],
+    roles: ["DBMS 솔루션 영업", "미들웨어 솔루션 영업", "모니터링·백업 솔루션 영업"],
   },
   {
     name: "기술지원팀",
-    roles: ["Oracle 기술지원", "TmaxSoft 기술지원", "유지보수 기술지원"],
+    roles: ["DBMS 기술지원", "미들웨어 기술지원", "유지보수 기술지원"],
   },
   {
     name: "SI 영업팀",
@@ -33,9 +33,8 @@ export type Partnership = {
   desc: string;
 };
 
-// 파트너십·협력업체 등록 — 회사개요 페이지용
+// 제조사 파트너십 — 회사개요 페이지용
 export const partnerships: Partnership[] = [
-  { group: "제조사 파트너", title: "Oracle OPN 골드 파트너", desc: "Oracle Exadata 공급업체 등록" },
-  { group: "제조사 파트너", title: "TmaxSoft 솔루션 공급업체", desc: "Tibero · JEUS · WebtoB" },
-  { group: "공공기관 협력업체", title: "한국전력공사 · 한전KDN", desc: "한국수력원자력 협력업체 등록" },
+  { group: "제조사 파트너", title: "글로벌 DBMS 제조사 골드 파트너", desc: "DB 전용 어플라이언스 공급업체 등록" },
+  { group: "제조사 파트너", title: "국산 DBMS·미들웨어 공급업체", desc: "DBMS · WAS · 웹서버 솔루션" },
 ];
