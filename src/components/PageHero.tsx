@@ -19,6 +19,7 @@ const heroImages: Record<string, string> = {
   business: heroBusiness,
   products: heroProducts,
   performance: heroResults,
+  support: heroCompany,
 };
 
 // 서브페이지 공통 상단 영역: 배경 이미지 + breadcrumb + 타이틀 + (있으면) 하위 탭
