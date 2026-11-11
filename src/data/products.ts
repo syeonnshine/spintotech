@@ -5,6 +5,8 @@ export type Product = {
   // 메인 칩처럼 좁은 자리에 쓰는 짧은 표기 (없으면 name 사용)
   short?: string;
   points: string[];
+  // 제조사 공식 제품 페이지 (있으면 제품소개 카드가 외부 링크가 됨)
+  url?: string;
 };
 
 export type ProductGroup = {
@@ -26,12 +28,14 @@ export const productGroups: ProductGroup[] = [
         kind: "관계형 DBMS",
         name: "Oracle RDBMS",
         points: ["글로벌 표준 관계형 데이터베이스", "Linux·Unix 환경에서 가장 널리 쓰이는 RDBMS"],
+        url: "https://www.oracle.com/kr/database/",
       },
       {
         maker: "ORACLE",
         kind: "DB 전용 플랫폼",
         name: "Oracle Exadata",
         points: ["Oracle 데이터베이스 전용 통합 플랫폼", "스핀토테크놀러지 Exadata 공급업체 등록"],
+        url: "https://www.oracle.com/kr/engineered-systems/exadata/",
       },
       {
         maker: "Tmax Tibero",
@@ -106,3 +110,11 @@ export const productGroups: ProductGroup[] = [
   //   ],
   // },
 ];
+
+// 제품소개 페이지에 공개할 제품 — 메인 화면은 productGroups 전체를 그대로 씀.
+// Tibero·미들웨어는 내용 확정 전까지 비공개, 공개할 때 이름만 추가하면 됨
+const publishedNames: string[] = ["Oracle RDBMS", "Oracle Exadata"];
+
+export const publishedProducts: Product[] = productGroups
+  .flatMap((group) => group.items)
+  .filter((item) => publishedNames.includes(item.name));

@@ -9,7 +9,7 @@ import Overview from "./pages/company/Overview";
 import ComingSoon from "./components/ComingSoon";
 // 내용 검토 전까지 준비중 화면으로 대체 — 오픈 시 아래 import와 라우트 element를 되돌리면 됨
 // import Business from "./pages/Business";
-// import Products from "./pages/Products";
+import Products from "./pages/Products";
 // import Performance from "./pages/performance/Performance";
 // import Clients from "./pages/performance/Clients";
 
@@ -36,7 +36,7 @@ export default function App() {
             <Route path="/company/overview" element={<Overview />} />
             <Route path="/company/history" element={<Navigate to="/company/overview" replace />} />
             <Route path="/business" element={<ComingSoon title="사업분야" />} />
-            <Route path="/products" element={<ComingSoon title="제품소개" />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/support" element={<ComingSoon title="고객지원" />} />
             {/* 실적·고객사는 메뉴에서 빠짐 — 예전 주소로 들어오면 고객지원으로 보냄 */}
             <Route path="/performance/*" element={<Navigate to="/support" replace />} />
