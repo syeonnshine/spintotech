@@ -7,7 +7,7 @@ export default function Products() {
       <PageHero
         crumbs={[{ label: "홈", path: "/" }, { label: "제품소개" }]}
         title="제품소개"
-        desc="핵심 업무 데이터를 지키는 데이터베이스와 전용 플랫폼을 공급합니다."
+        desc="멈추지 않는 업무 환경을 위한 데이터베이스 솔루션을 공급합니다."
       />
 
       {/* 공개 제품이 2개뿐이라 그룹 구분 없이 한 섹션에 카드로 나열 */}
