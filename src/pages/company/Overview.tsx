@@ -98,9 +98,6 @@ export default function Overview() {
             <div key={office.label}>
               <h3 className="text-lg font-bold text-navy">{office.label}</h3>
               <p className="mt-1 text-sm text-muted sm:text-base">{office.address}</p>
-              {office.jibunAddress && (
-                <p className="mt-0.5 text-xs text-muted sm:text-sm">지번 {office.jibunAddress}</p>
-              )}
               <div className="mt-4">
                 <NaverMap
                   lat={office.location.lat}
