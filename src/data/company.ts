@@ -40,7 +40,7 @@ export const offices: Office[] = [
   { label: "본사", address: company.address, location: company.location },
   {
     label: "나주지사",
-    address: "전라남도 나주시 빛가람로 680, 리더스타워 7층 701호 (빛가람동)",
+    address: "전남광주통합특별시 나주시 빛가람로 680, 리더스타워 7층 701호 (빛가람동)",
     // [확인 필요] 근사값 — 네이버 지도에서 리더스타워 우클릭 → 좌표 복사로 교체
     location: { lat: 35.0172, lng: 126.7896 },
   },
