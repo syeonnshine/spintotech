@@ -4,6 +4,8 @@ type Props = {
   lat: number;
   lng: number;
   title: string;
+  // 대체 링크의 네이버 지도 검색어. 지사명은 검색이 안 되므로 주소를 넘김 (없으면 title)
+  query?: string;
 };
 
 // @types/navermaps 없이 쓰는 최소 선언
@@ -37,17 +39,22 @@ function loadSdk() {
   return sdkPromise;
 }
 
-export default function NaverMap({ lat, lng, title }: Props) {
+// 도메인 미등록 등 인증 실패는 onerror가 아니라 전역 콜백 하나로만 알려줌.
+// 한 페이지에 지도가 여러 개면 콜백을 덮어쓰게 되므로 구독자 목록으로 모든 지도에 전달
+const authFailureListeners = new Set<() => void>();
+window.navermap_authFailure = () => {
+  console.error("네이버 지도 인증 실패 — NCP 콘솔의 Web 서비스 URL 등록을 확인하세요.");
+  authFailureListeners.forEach((fn) => fn());
+};
+
+export default function NaverMap({ lat, lng, title, query }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(!clientId);
 
   useEffect(() => {
     if (!clientId) return;
-    // 도메인 미등록 등 인증 실패는 onerror가 아니라 이 전역 콜백으로만 알려줌
-    window.navermap_authFailure = () => {
-      console.error("네이버 지도 인증 실패 — NCP 콘솔의 Web 서비스 URL 등록을 확인하세요.");
-      setFailed(true);
-    };
+    const onAuthFailure = () => setFailed(true);
+    authFailureListeners.add(onAuthFailure);
 
     let cancelled = false;
     loadSdk()
@@ -68,6 +75,7 @@ export default function NaverMap({ lat, lng, title }: Props) {
 
     return () => {
       cancelled = true;
+      authFailureListeners.delete(onAuthFailure);
     };
   }, [lat, lng, title]);
 
@@ -75,7 +83,7 @@ export default function NaverMap({ lat, lng, title }: Props) {
   if (failed) {
     return (
       <a
-        href={`https://map.naver.com/p/search/${encodeURIComponent(title)}`}
+        href={`https://map.naver.com/p/search/${encodeURIComponent(query ?? title)}`}
         target="_blank"
         rel="noreferrer"
         className="flex h-[320px] w-full items-center justify-center rounded border border-line bg-section text-sm text-muted hover:text-brand sm:h-[400px]"

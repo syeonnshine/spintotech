@@ -29,6 +29,23 @@ export const company: CompanyInfo = {
   location: { lat: 37.5094, lng: 127.0567 },
 } as const;
 
+// 오시는 길에 지도와 함께 나열할 사업장 목록 (본사 → 지사 순)
+export type Office = {
+  label: string;
+  address: string;
+  location: { lat: number; lng: number };
+};
+
+export const offices: Office[] = [
+  { label: "본사", address: company.address, location: company.location },
+  {
+    label: "나주지사",
+    address: "전라남도 나주시 빛가람로 680, 리더스타워 7층 701호 (빛가람동)",
+    // [확인 필요] 근사값 — 네이버 지도에서 리더스타워 우클릭 → 좌표 복사로 교체
+    location: { lat: 35.0172, lng: 126.7896 },
+  },
+];
+
 // 메인 Hero·숫자 카드에 쓰는 핵심 지표 (회사소개서 출처 — 확정된 실제 수치)
 export type StatCard = {
   value: string;

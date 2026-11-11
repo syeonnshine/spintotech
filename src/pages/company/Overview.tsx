@@ -1,6 +1,6 @@
 import PageHero from "../../components/PageHero";
 import NaverMap from "../../components/NaverMap";
-import { company, greeting } from "../../data/company";
+import { company, greeting, offices } from "../../data/company";
 // import { orgTeams } from "../../data/org";
 
 export default function Overview() {
@@ -92,9 +92,22 @@ export default function Overview() {
       {/* 오시는 길 */}
       <section className="mx-auto max-w-container px-6 py-section-mobile sm:py-section">
         <h2 className="text-[28px] font-bold text-navy sm:text-[32px]">오시는 길</h2>
-        <p className="mt-2 text-muted">{company.address}</p>
-        <div className="mt-6">
-          <NaverMap lat={company.location.lat} lng={company.location.lng} title={company.nameKo} />
+        {/* 데스크톱은 본사·지사 지도를 나란히, 모바일은 세로로 쌓음 */}
+        <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-6">
+          {offices.map((office) => (
+            <div key={office.label}>
+              <h3 className="text-lg font-bold text-navy">{office.label}</h3>
+              <p className="mt-1 text-sm text-muted sm:text-base">{office.address}</p>
+              <div className="mt-4">
+                <NaverMap
+                  lat={office.location.lat}
+                  lng={office.location.lng}
+                  title={`${company.nameKo} ${office.label}`}
+                  query={office.address}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>

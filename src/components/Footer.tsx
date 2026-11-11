@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { navItems } from "../data/nav";
-import { company } from "../data/company";
+import { company, offices } from "../data/company";
 import logo from "../assets/logo.svg";
 
 export default function Footer() {
@@ -15,8 +15,8 @@ export default function Footer() {
             <img src={logo} alt={company.nameKo} className="h-10 w-auto" />
           </Link>
           <address className="mt-2 text-sm not-italic leading-relaxed text-muted">
-            {/* 데스크톱에서는 주소·연락처를 한 줄로 이어 붙임 */}
-            {company.address}
+            {/* 데스크톱에서는 본사 주소·연락처를 한 줄로 이어 붙이고, 지사는 다음 줄에 둠 */}
+            <span className="font-semibold text-body">{offices[0].label}</span> {offices[0].address}
             <span aria-hidden="true" className="mx-2 hidden lg:inline">|</span>
             <br className="lg:hidden" />
             {/* 번호 단위로 묶어 좁은 화면에서 번호 중간이 끊기지 않게 함. 모바일에서 바로 걸 수 있도록 tel 링크 */}
@@ -25,6 +25,11 @@ export default function Footer() {
             </a>
             <span aria-hidden="true" className="mx-2">|</span>
             <span className="whitespace-nowrap">F. {company.fax}</span>
+            {offices.slice(1).map((office) => (
+              <span key={office.label} className="block">
+                <span className="font-semibold text-body">{office.label}</span> {office.address}
+              </span>
+            ))}
           </address>
         </div>
         {/* 데스크톱은 메뉴 아래에 저작권을 둬서 좌·우 블록 높이를 맞춤 (푸터가 두 줄 높이로 끝남) */}
