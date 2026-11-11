@@ -33,6 +33,8 @@ export const company: CompanyInfo = {
 export type Office = {
   label: string;
   address: string;
+  // 도로명 주소만으론 찾기 어려운 방문객용 보조 표기 (오시는 길에만 노출, 푸터는 공간상 생략)
+  jibunAddress?: string;
   location: { lat: number; lng: number };
 };
 
@@ -41,6 +43,7 @@ export const offices: Office[] = [
   {
     label: "나주지사",
     address: "전남광주통합특별시 나주시 빛가람로 680, 리더스타워 7층 701호 (빛가람동)",
+    jibunAddress: "전남광주통합특별시 나주시 빛가람동 348-3",
     // [확인 필요] 근사값 — 네이버 지도에서 리더스타워 우클릭 → 좌표 복사로 교체
     location: { lat: 35.0172, lng: 126.7896 },
   },
